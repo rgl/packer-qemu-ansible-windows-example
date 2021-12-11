@@ -1,0 +1,59 @@
+- name: Set region
+  community.windows.win_region:
+    location: 193
+    format: pt-PT           # date format, number format, etc.
+    unicode_language: en-US # UI language.
+    copy_settings: yes
+
+- name: Set keyboard layout
+  ansible.windows.win_powershell:
+    script: "{{ lookup('file', 'set-keyboard-layout.ps1') }}"
+    parameters:
+      languageTag: pt-PT
+
+- name: Set timezone
+  community.windows.win_timezone:
+    timezone: GMT Standard Time
+
+- name: Install Chocolatey
+  chocolatey.chocolatey.win_chocolatey:
+    # https://community.chocolatey.org/packages/chocolatey
+    name: chocolatey
+    version: '0.11.3'
+
+- name: Install Notepad3
+  chocolatey.chocolatey.win_chocolatey:
+    # https://community.chocolatey.org/packages/notepad3
+    name: notepad3
+    version: '5.21.1129.1'
+
+- name: Install Firefox
+  block:
+    - name: Install Firefox
+      chocolatey.chocolatey.win_chocolatey:
+        # https://community.chocolatey.org/packages/firefox
+        name: firefox
+        version: '95.0'
+        package_params: /l:en-US
+    - name: Install SetDefaultBrowser
+      chocolatey.chocolatey.win_chocolatey:
+        # https://community.chocolatey.org/packages/setdefaultbrowser
+        name: setdefaultbrowser
+        version: '1.5.0'
+    - name: Set Firefox as the default browser
+      ansible.windows.win_powershell:
+        script: |
+          Set-StrictMode -Version Latest
+          $ErrorActionPreference = 'Stop'
+          $ProgressPreference = 'SilentlyContinue'
+          $Ansible.Changed = $false
+          $browser = @((SetDefaultBrowser | Where-Object {$_ -like 'HKLM Firefox-*'}) -split ' ')
+          $browserId = $browser[1]
+          $path = "$($Ansible.Tmpdir)\AppAssociations.xml"
+          Dism /Online "/Export-DefaultAppAssociations:$path"
+          [xml]$doc = Get-Content $path
+          $node = $doc.SelectSingleNode("/DefaultAssociations/Association[@ApplicationName='Firefox']")
+          if (!$node) {
+            SetDefaultBrowser @browser
+            $Ansible.Changed = $true
+          }
