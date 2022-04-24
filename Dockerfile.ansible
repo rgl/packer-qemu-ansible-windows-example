@@ -1,6 +1,7 @@
-#syntax=docker/dockerfile:1.3-labs
+#syntax=docker/dockerfile:1.4
 
-FROM debian:bullseye-slim
+# debian 11 (bullseye).
+FROM debian:11-slim
 
 # install ansible dependencies.
 # see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-with-pip
@@ -32,6 +33,8 @@ EOF
 
 # install ansible collections.
 COPY requirements.yml .
-RUN ansible-galaxy collection install \
-        -r requirements.yml \
-        -p /usr/share/ansible/collections
+RUN <<EOF
+ansible-galaxy collection install \
+    -r requirements.yml \
+    -p /usr/share/ansible/collections
+EOF
