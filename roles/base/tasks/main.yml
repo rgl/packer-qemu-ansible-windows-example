@@ -19,13 +19,13 @@
   chocolatey.chocolatey.win_chocolatey:
     # https://community.chocolatey.org/packages/chocolatey
     name: chocolatey
-    version: '1.1.0'
+    version: '2.0.0'
 
 - name: Install Notepad3
   chocolatey.chocolatey.win_chocolatey:
     # https://community.chocolatey.org/packages/notepad3
     name: notepad3
-    version: '5.21.1129.1'
+    version: '6.23.203.2'
 
 - name: Install Firefox
   block:
@@ -33,7 +33,7 @@
       chocolatey.chocolatey.win_chocolatey:
         # https://community.chocolatey.org/packages/firefox
         name: firefox
-        version: '99.0.1'
+        version: '114.0.1'
         package_params: /l:en-US
     - name: Install SetDefaultBrowser
       chocolatey.chocolatey.win_chocolatey:
