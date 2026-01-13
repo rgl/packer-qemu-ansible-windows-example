@@ -2,9 +2,9 @@
 
 This shows how to provision a VM image using [Ansible](https://www.ansible.com/) from a [Packer](https://www.packer.io/) template.
 
-# Usage (Ubuntu 22.04)
+# Usage (Ubuntu 24.04)
 
-Install packer, qemu/kvm, docker, make, vagrant and the [Windows 2022 vagrant box](https://github.com/rgl/windows-vagrant).
+Install packer, qemu/kvm, docker, make, vagrant and the [Windows 2022 UEFI vagrant box](https://github.com/rgl/windows-vagrant).
 
 Provision the VM image and vagrant box:
 
@@ -23,4 +23,10 @@ exit
 vagrant destroy -f
 popd
 vagrant box remove -f packer-qemu-ansible-windows-example
+```
+
+List this repository dependencies (and which have newer versions):
+
+```bash
+GITHUB_COM_TOKEN='YOUR_GITHUB_PERSONAL_TOKEN' ./renovate.sh
 ```
