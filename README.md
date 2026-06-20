@@ -6,6 +6,12 @@ This shows how to provision a VM image using [Ansible](https://www.ansible.com/)
 
 Install packer, qemu/kvm, docker, make, vagrant and the [Windows 2022 UEFI vagrant box](https://github.com/rgl/windows-vagrant).
 
+Lint the [`playbook.yml` playbook](playbook.yml) playbook:
+
+```bash
+./ansible-lint.sh --offline --parseable playbook.yml || echo 'ERROR linting'
+```
+
 Provision the VM image and vagrant box:
 
 ```bash

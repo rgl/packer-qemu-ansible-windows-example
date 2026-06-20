@@ -1,4 +1,5 @@
-- hosts: default
+- name: Playbook
+  hosts: default
   gather_facts: false
   roles:
     - base

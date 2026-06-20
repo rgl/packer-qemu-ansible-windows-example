@@ -8,6 +8,3 @@ collections:
   # see https://galaxy.ansible.com/community/general
   - name: community.general
     version: 13.1.0
-  # see https://galaxy.ansible.com/community/windows
-  - name: community.windows
-    version: 3.2.0
