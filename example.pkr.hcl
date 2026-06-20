@@ -2,12 +2,12 @@ packer {
   required_plugins {
     # see https://github.com/hashicorp/packer-plugin-vagrant
     vagrant = {
-      version = "1.1.6"
+      version = "1.1.7"
       source  = "github.com/hashicorp/vagrant"
     }
     # see https://github.com/hashicorp/packer-plugin-ansible
     ansible = {
-      version = "1.1.4"
+      version = "1.1.5"
       source  = "github.com/hashicorp/ansible"
     }
   }

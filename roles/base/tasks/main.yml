@@ -20,14 +20,14 @@
     # https://community.chocolatey.org/packages/chocolatey
     name: chocolatey
     # renovate: datasource=nuget:chocolatey depName=chocolatey
-    version: '2.6.0'
+    version: '2.7.3'
 
 - name: Install Notepad3
   chocolatey.chocolatey.win_chocolatey:
     # https://community.chocolatey.org/packages/notepad3
     name: notepad3
     # renovate: datasource=nuget:chocolatey depName=notepad3
-    version: '6.25.822.1'
+    version: '7.26.602.1'
 
 - name: Install Firefox
   block:
@@ -36,7 +36,7 @@
         # https://community.chocolatey.org/packages/firefox
         name: firefox
         # renovate: datasource=nuget:chocolatey depName=firefox
-        version: '146.0.1'
+        version: '152.0.1'
         package_params: /l:en-US
     - name: Install SetDefaultBrowser
       chocolatey.chocolatey.win_chocolatey:
