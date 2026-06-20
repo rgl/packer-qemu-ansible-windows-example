@@ -22,6 +22,9 @@ Try using the VM image in a new VM:
 
 ```bash
 vagrant box add -f packer-qemu-ansible-windows-example packer-qemu-ansible-windows-example.box
+for vol in $(virsh vol-list --pool default | awk '/packer-qemu-ansible-windows-example_/ {print $1}'); do
+    virsh vol-delete --pool default "$vol"
+done
 pushd example
 vagrant up --no-destroy-on-error --no-tty --provider=libvirt
 vagrant ssh
@@ -29,6 +32,9 @@ exit
 vagrant destroy -f
 popd
 vagrant box remove -f packer-qemu-ansible-windows-example
+for vol in $(virsh vol-list --pool default | awk '/packer-qemu-ansible-windows-example_/ {print $1}'); do
+    virsh vol-delete --pool default "$vol"
+done
 ```
 
 List this repository dependencies (and which have newer versions):
