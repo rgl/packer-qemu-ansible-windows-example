@@ -32,15 +32,15 @@ variable "vagrant_box" {
 }
 
 source "qemu" "example" {
-  accelerator       = "kvm"
-  machine_type      = "q35"
   efi_boot          = true
   efi_firmware_code = "/usr/share/OVMF/OVMF_CODE_4M.fd"
   efi_firmware_vars = "/usr/share/OVMF/OVMF_VARS_4M.fd"
   cpus              = 2
   memory            = 4096
   qemuargs = [
-    ["-cpu", "host"],
+    ["-machine", "type=q35,accel=kvm,hpet=off"],
+    ["-cpu", "host,hv-passthrough"],
+    ["-rtc", "base=localtime,clock=host"],
     ["-device", "qemu-xhci"],
     ["-device", "virtio-tablet"],
     ["-device", "virtio-scsi-pci,id=scsi0"],
