@@ -36,7 +36,7 @@
         # https://community.chocolatey.org/packages/firefox
         name: firefox
         # renovate: datasource=nuget:chocolatey depName=firefox
-        version: '152.0.1'
+        version: '152.0.4'
         package_params: /l:en-US
     - name: Install SetDefaultBrowser
       chocolatey.chocolatey.win_chocolatey:
